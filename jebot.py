@@ -10,7 +10,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 
 
 Jebot = Client(
-   "Song Downloader",
+   "Hüsü Song🎶",
    api_id=Config.APP_ID,
    api_hash=Config.API_HASH,
    bot_token=Config.TG_BOT_TOKEN,
@@ -151,7 +151,7 @@ async def start(client, message):
 
 @Mr_HD_20 tərəfindən hazırlanıb⚡
 
-Hit help button to find out more about how to use me</b>""",   
+Məni necə istifadə edəcəyinizi öyrənmək üçün kömək düyməsini vurun</b>""",   
                             reply_markup=InlineKeyboardMarkup(
                                 [[
                                         InlineKeyboardButton(
