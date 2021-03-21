@@ -1,14 +1,3 @@
-#    Copyright (c) 2021 Infinity BOTs <https://t.me/Infinity_BOTs>
- 
-#    This program is free software: you can redistribute it and/or modify  
-#    it under the terms of the GNU General Public License as published by  
-#    the Free Software Foundation, version 3.
-# 
-#    This program is distributed in the hope that it will be useful, but 
-#    WITHOUT ANY WARRANTY; without even the implied warranty of 
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
-#    General Public License for more details.
-
 import os
 import aiohttp
 from pyrogram import filters, Client
@@ -57,36 +46,24 @@ class AioHttp:
             async with session.get(link) as resp:
                 return await resp.read()
 
- #For private messages        
- #Ignore commands
- #No bots also allowed
 @Jebot.on_message(filters.private & ~filters.bot & ~filters.command("help") & ~filters.command("start") & ~filters.command("s"))  
-#Lets Keep this Simple
+
 async def song(client, message):
-  # Hope this will fix the args issue
-  # defining args as a array instead of direct defining
-  # also splitting text for correct yt search
-  
 
     message.chat.id
     user_id = message.from_user["id"]
     args = message.text.split(None, 1)
     args = str(args)
-    # Adding +song for better  searching
-    args = args + " " + "song"
-    #Defined above.. THINK USELESS
-    #args = get_arg(message) + " " + "song"
 
-    #Added while callback... I think Useless    
-    #if args.startswith("/help"):
-        #return ""    
+    args = args + " " + "song"
+    
     status = await message.reply(
-             text="<b>Downloading your song, Plz wait 🥺\n\nMade by @munnipopz🤓</b>",
+             text="<b>Mahnınız yüklənir. zəhmət olmasa gözləyin😁\n\nQurucum: @Mr_HD_20⚡</b>",
              disable_web_page_preview=True,
                         reply_markup=InlineKeyboardMarkup(
                             [[
                                     InlineKeyboardButton(
-                                        "Developer", url="https://t.me/munnipopz")
+                                        "Qrupumuz", url="https://t.me/creativmafia")
                                 ]]
                         ),
                parse_mode="html",
@@ -94,14 +71,14 @@ async def song(client, message):
       )
     video_link = yt_search(args)
     if not video_link:
-        await status.edit("<b>Song not found 😑</b>")
+        await status.edit("<b>Mahnı tapılmadı 😑</b>")
         return ""
     yt = YouTube(video_link)
     audio = yt.streams.filter(only_audio=True).first()
     try:
         download = audio.download(filename=f"{str(user_id)}")
     except Exception as ex:
-        await status.edit("<b>Failed to download song 🤕</b>")
+        await status.edit("<b>Mahnını yükləmək alınmadı 🤕</b>")
         LOGGER.error(ex)
         return ""
     os.rename(download, f"{str(user_id)}.mp3")
@@ -125,15 +102,15 @@ async def song(client, message):
     user_id = message.from_user["id"]
     args = get_arg(message) + " " + "song"
     if args.startswith(" "):
-        await message.reply("<b>Enter a song name❗\n\nExample: `/s guleba`</b>")
+        await message.reply("<b>Mahnı adı daxil edin❗\n\nMisal: Elvin Nadir Canan`</b>")
         return ""
     status = await message.reply(
-             text="<b>Downloading your song, Plz wait 🥺\n\nMade by @munnipopz 😃</b>",
+             text="<b>Mahnınız yüklənir, xahiş edirəm gözləyin👀\n\n@Mr_HD_20 tərəfindən hazırlanıb⚡</b>",
              disable_web_page_preview=True,
                         reply_markup=InlineKeyboardMarkup(
                             [[
                                     InlineKeyboardButton(
-                                        "Developer", url="https://t.me/munnipopz")
+                                        "Qrupumuz", url="https://t.me/creativechat")
                                 ]]
                         ),
                parse_mode="html",
@@ -141,14 +118,14 @@ async def song(client, message):
       )
     video_link = yt_search(args)
     if not video_link:
-        await status.edit("<b>Song not found 😑</b>")
+        await status.edit("<b>Mahnı tapılmadı 😑</b>")
         return ""
     yt = YouTube(video_link)
     audio = yt.streams.filter(only_audio=True).first()
     try:
         download = audio.download(filename=f"{str(user_id)}")
     except Exception as ex:
-        await status.edit("<b>Failed to download song 🤕</b>")
+        await status.edit("<b>Mahnını yükləmək alınmadı 🤕</b>")
         LOGGER.error(ex)
         return ""
     os.rename(download, f"{str(user_id)}.mp3")
@@ -169,17 +146,18 @@ async def start(client, message):
    if message.chat.type == 'private':
        await Jebot.send_message(
                chat_id=message.chat.id,
-               text="""<b>Hey There, I'm a Song Downloader Bot
+               text="""<b>Hey Salam {mention}, Mən Mahnı Yükləyən Bot
+İstifadəsi: Sadəcə mahnı adı
 
-Made by @munnipopz😄
+@Mr_HD_20 tərəfindən hazırlanıb⚡
 
 Hit help button to find out more about how to use me</b>""",   
                             reply_markup=InlineKeyboardMarkup(
                                 [[
                                         InlineKeyboardButton(
-                                            "Help", callback_data="help"),
+                                            "Kömək", callback_data="help"),
                                         InlineKeyboardButton(
-                                            "😈Channel😈", url="https://t.me/mpazaanbot")
+                                            "✨Qrupumuz✨", url="https://t.me/creativmafia")
                                     ]]
                             ),        
             disable_web_page_preview=True,        
@@ -190,11 +168,11 @@ Hit help button to find out more about how to use me</b>""",
 
        await Jebot.send_message(
                chat_id=message.chat.id,
-               text="""<b>Song Downloader Online\n\n</b>""",   
+               text="""<b>Mahnı Yükləyici Aktivdir\n\n</b>""",   
                             reply_markup=InlineKeyboardMarkup(
                                 [[
                                         InlineKeyboardButton(
-                                            "Help", callback_data="help")
+                                            "Kömək", callback_data="help")
                                         
                                     ]]
                             ),        
@@ -208,15 +186,15 @@ async def help(client, message):
     if message.chat.type == 'private':   
         await Jebot.send_message(
                chat_id=message.chat.id,
-               text="""<b>Send a song name to download song
+               text="""<b>Mahnı yükləmək üçün bir mahnı adı göndərin
 
-~ @munnipopz</b>""",
+~ @Mr_HD_20</b>""",
             reply_to_message_id=message.message_id
         )
     else:
         await Jebot.send_message(
                chat_id=message.chat.id,
-               text="<b>Song Downloader Help\n\nEnter a song name❗\n\nExample: `/s guleba`</b>",
+               text="<b>Mahnı Yükləyicidən istifadə\n\nMahnı adı daxil edin❗\n\nMisal: `Elvin Nasir Canan`</b>",
             reply_to_message_id=message.message_id
         )     
         
@@ -230,9 +208,9 @@ async def button(Jebot, update):
 
 print(
     """
-Bot Started!
+Bot başladı!
 
-Join @mpazaanbot
+Qoşulun @CreativMafia
 """
 )
 
